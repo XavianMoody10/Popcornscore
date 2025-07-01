@@ -1,24 +1,18 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import { MediaBackdropSlider } from "../../components/MediaBackdropSlider/MediaBackdropSlider";
 import { useTrendingData } from "../../hooks/useTrendingData";
 
-export const Home = () => {
-  const trending = useTrendingData("all");
+export const Movies = () => {
+  const trending = useTrendingData("movie");
 
   return (
     <main className=" min-h-screen">
-      <div className=" w-[95%] max-w-[1400px] mx-auto space-y-12">
+      <div className=" w-[95%] max-w-[1400px] mx-auto">
         <MediaBackdropSlider
           results={trending.query.data?.results}
           isSuccess={trending.query.isSuccess}
           isLoading={trending.query.isLoading}
           error={trending.query.error}
         />
-
-        <section className="">
-          <h2 className=" text-2xl font-bold">Now Playing</h2>
-        </section>
       </div>
     </main>
   );

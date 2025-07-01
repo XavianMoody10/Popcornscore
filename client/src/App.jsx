@@ -13,6 +13,9 @@ import { Login } from "./pages/Login/Login";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { UserStatusProvider } from "./contexts/UserStatusContext";
+import { Movies } from "./pages/Movies/Movies";
+import { TVShows } from "./pages/TVShows/TVShows";
+import { Details } from "./pages/Details/Details";
 
 export const queryClient = new QueryClient();
 
@@ -31,6 +34,9 @@ const App = () => {
         >
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/movie" element={<Movies />} />
+          <Route path="/tv" element={<TVShows />} />
+          <Route path="/details/:mediaType/:mediaId" element={<Details />} />
           <Route index element={<Home />} />
         </Route>
       </Route>

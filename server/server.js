@@ -5,6 +5,7 @@ import { connectToDatabase } from "./src/config/database/database.config.js";
 import { initiateMockServiceWorker } from "./src/config/msw/msw.config.js";
 import { passport } from "./src/config/passport/passport.config.js";
 import authenticationRouter from "./src/routes/authentication.route.js";
+import trendingRouter from "./src/routes/trending.route.js";
 
 const app = express();
 const ORIGIN = process.env.ORIGIN;
@@ -35,6 +36,7 @@ app.use(passport.session());
 
 // Routes
 app.use("/authentication", authenticationRouter);
+app.use("/trending", trendingRouter);
 
 initiateMockServiceWorker(); // start mock service worker (DEVELOPMENT ONLY)
 
