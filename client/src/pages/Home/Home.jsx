@@ -1,5 +1,3 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import { MediaBackdropSlider } from "../../components/MediaBackdropSlider/MediaBackdropSlider";
 import { useTrendingData } from "../../hooks/useTrendingData";
 
@@ -15,10 +13,6 @@ export const Home = () => {
           isLoading={trending.query.isLoading}
           error={trending.query.error}
         />
-
-        <section className="">
-          <h2 className=" text-2xl font-bold">Now Playing</h2>
-        </section>
       </div>
     </main>
   );
