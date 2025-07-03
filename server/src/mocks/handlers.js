@@ -3,6 +3,8 @@ import allTrendingMockdata from "./mockdata/allTrending.mockdata.js";
 import trendingMoviesMockdata from "./mockdata/trendingMovies.mockdata.js";
 import nowPlayingMoviesMockdata from "./mockdata/nowPlayingMovies.mockdata.js";
 import airingTodayShowsMockdata from "./mockdata/airingTodayShows.mockdata.js";
+import tvShowDetailsMockdata from "./mockdata/tvShowDetails.mockdata.js";
+import movieDetailsMockdata from "./mockdata/movieDetails.mockdata.js";
 
 export const handlers = [
   http.get("https://api.themoviedb.org/3/trending/all/day", async () => {
@@ -140,5 +142,13 @@ export const handlers = [
       },
       { status: 404 }
     );
+  }),
+
+  http.get("https://api.themoviedb.org/3/tv/65701", async () => {
+    return HttpResponse.json(tvShowDetailsMockdata);
+  }),
+
+  http.get("https://api.themoviedb.org/3/movie/552524", async () => {
+    return HttpResponse.json(movieDetailsMockdata);
   }),
 ];

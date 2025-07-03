@@ -17,7 +17,7 @@ export const MediaBackdrop = ({ mediaData, media_type }) => {
           <h2 className=" text-white text-3xl font-bold">{title}</h2>
           <p className=" text-white">{overview}</p>
           <Link
-            to={`/details/${mediaType}/${id}`}
+            to={`/${mediaType}/details/${id}`}
             className=" w-fit cursor-pointer bg-[#a695ff] text-sm text-white font-semibold py-3 px-7 rounded-md hover:bg-[#947EE6] duration-150"
           >
             View Details

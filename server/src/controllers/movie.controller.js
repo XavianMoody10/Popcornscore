@@ -26,3 +26,27 @@ export async function getMoviesByList(req, res) {
     return res.status(404).send("Failed to fetch movie list");
   }
 }
+
+export async function getMovieDetails(req, res) {
+  const { movie_id } = req.query;
+
+  const url = `https://api.themoviedb.org/3/movie/${movie_id}`;
+
+  const options = {
+    headers: {
+      accept: "application/json",
+      Authorization: process.env.API_KEY,
+    },
+    params: {
+      language: "en-US",
+    },
+  };
+
+  try {
+    const response = await axios.get(url, options);
+    return res.send(response.data);
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    return res.status(404).send("Failed to fetch movie details");
+  }
+}

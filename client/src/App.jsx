@@ -15,7 +15,8 @@ import { Provider } from "react-redux";
 import { UserStatusProvider } from "./contexts/UserStatusContext";
 import { Movies } from "./pages/Movies/Movies";
 import { TVShows } from "./pages/TVShows/TVShows";
-import { Details } from "./pages/Details/Details";
+import { TVShowDetails } from "./pages/TVShowDetails/TVShowDetails";
+import { MovieDetails } from "./pages/MovieDetails/MovieDetails";
 
 export const queryClient = new QueryClient();
 
@@ -36,7 +37,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/movie" element={<Movies />} />
           <Route path="/tv" element={<TVShows />} />
-          <Route path="/details/:mediaType/:mediaId" element={<Details />} />
+          <Route path="/tv/details/:mediaId" element={<TVShowDetails />} />
+          <Route path="/movie/details/:mediaId" element={<MovieDetails />} />
           <Route index element={<Home />} />
         </Route>
       </Route>

@@ -24,7 +24,7 @@ export const MediaPosterSlider = ({
           <img src={posterUrl} alt={title} />
 
           <Link
-            to={`/details/${mediaType}/${id}`}
+            to={`/${mediaType}/details/${id}`}
             className=" absolute top-0 right-0 left-0 bottom-0 bg-black/60 flex items-center justify-center opacity-0 hover:opacity-100 duration-150"
           >
             <InfoIcon

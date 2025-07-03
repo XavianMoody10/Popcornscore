@@ -26,3 +26,27 @@ export async function getTVShowsByList(req, res) {
     return res.status(404).send("Failed to fetch tv shows list");
   }
 }
+
+export async function getTVShowDetails(req, res) {
+  const { series_id } = req.query;
+
+  const url = `https://api.themoviedb.org/3/tv/${series_id}`;
+
+  const options = {
+    headers: {
+      accept: "application/json",
+      Authorization: process.env.API_KEY,
+    },
+    params: {
+      language: "en-US",
+    },
+  };
+
+  try {
+    const response = await axios.get(url, options);
+    return res.send(response.data);
+  } catch (error) {
+    console.error("Error fetching tv show details:", error);
+    return res.status(404).send("Failed to fetch tv show details");
+  }
+}
