@@ -8,6 +8,7 @@ import authenticationRouter from "./src/routes/authentication.route.js";
 import trendingRouter from "./src/routes/trending.route.js";
 import movieRouter from "./src/routes/movie.route.js";
 import tvRouter from "./src/routes/tvShow.route.js";
+import MongoStore from "connect-mongo";
 
 const app = express();
 const ORIGIN = process.env.ORIGIN;
@@ -21,6 +22,10 @@ app.use(express.json());
 app.use(
   session({
     secret: secret,
+    store: MongoStore.create({
+      mongoUrl: process.env.DATABASE_CONNECTION,
+      dbName: "test",
+    }),
     saveUninitialized: false,
     resave: process.env.NODE_ENV === "production",
     rolling: true,
