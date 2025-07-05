@@ -28,24 +28,26 @@ export const Login = () => {
     <main className=" absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center gap-3">
       {login.mutation.isPending && <LoadingOverlay />}
 
-      <FormErrorMessage errorMessage={errorMessage} />
+      <div className=" w-full flex flex-col items-center gap-3 max-w-[400px]">
+        <FormErrorMessage errorMessage={errorMessage} />
 
-      <FormWrapper onSubmit={login.onSubmitHandler}>
-        <div className=" flex flex-col gap-2">
-          <FormTextInput
-            type={"email"}
-            placeholder={"Email"}
-            onChange={(e) => login.setEmail(e.target.value)}
-          />
-          <FormTextInput
-            type={"password"}
-            placeholder={"Password"}
-            onChange={(e) => login.setPassword(e.target.value)}
-          />
-        </div>
+        <FormWrapper onSubmit={login.onSubmitHandler}>
+          <div className=" flex flex-col gap-2">
+            <FormTextInput
+              type={"email"}
+              placeholder={"Email"}
+              onChange={(e) => login.setEmail(e.target.value)}
+            />
+            <FormTextInput
+              type={"password"}
+              placeholder={"Password"}
+              onChange={(e) => login.setPassword(e.target.value)}
+            />
+          </div>
 
-        <FormButton>Login</FormButton>
-      </FormWrapper>
+          <FormButton>Login</FormButton>
+        </FormWrapper>
+      </div>
 
       <Link
         to={"/signup"}

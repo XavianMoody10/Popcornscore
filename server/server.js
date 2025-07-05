@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import { connectToDatabase } from "./src/config/database/database.config.js";
 import { initiateMockServiceWorker } from "./src/config/msw/msw.config.js";
 import { passport } from "./src/config/passport/passport.config.js";
@@ -8,7 +9,7 @@ import authenticationRouter from "./src/routes/authentication.route.js";
 import trendingRouter from "./src/routes/trending.route.js";
 import movieRouter from "./src/routes/movie.route.js";
 import tvRouter from "./src/routes/tvShow.route.js";
-import MongoStore from "connect-mongo";
+import reviewRouter from "./src/routes/review.route.js";
 
 const app = express();
 const ORIGIN = process.env.ORIGIN;
@@ -46,6 +47,7 @@ app.use("/authentication", authenticationRouter);
 app.use("/trending", trendingRouter);
 app.use("/movie", movieRouter);
 app.use("/tv", tvRouter);
+app.use("/review", reviewRouter);
 
 initiateMockServiceWorker(); // start mock service worker (DEVELOPMENT ONLY)
 

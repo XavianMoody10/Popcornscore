@@ -18,7 +18,7 @@ export const Header = () => {
         <Link to={"/"}>
           <img
             src={logo}
-            alt=""
+            alt="logo"
             width={130}
             className=" min-[500px]:w-[180px]"
           />
@@ -71,7 +71,6 @@ export const Header = () => {
           >
             Movies
           </Link>
-
           <Link
             to={"/tv"}
             className=" w-full text-sm text-center font-semibold border border-gray-200 shadow rounded-sm flex items-center justify-center hover:shadow-lg duration-150"

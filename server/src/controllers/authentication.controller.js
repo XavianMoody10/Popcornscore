@@ -35,7 +35,7 @@ export async function loginUser(req, res, next) {
   passport.authenticate("local", (err, user, info) => {
     if (err) return res.status(404).send("Authentication error :" + err);
 
-    if (!user) return res.status(401).send(info);
+    if (!user) return res.status(401).send(info.message);
 
     req.logIn(user, (err) => {
       if (err) return res.status(404).send("Login error :" + err);
