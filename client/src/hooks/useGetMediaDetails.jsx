@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMovieDetails } from "../services/movies.services";
+import { getMediaDetails } from "../services/details.services";
 
-export const useGetMediaDetails = (mediaId) => {
+export const useGetMediaDetails = (mediaType, mediaId) => {
   const query = useQuery({
-    queryKey: ["movie", mediaId],
-    queryFn: () => getMovieDetails(mediaId),
+    queryKey: [mediaType, mediaId],
+    queryFn: () => getMediaDetails(mediaType, mediaId),
     retry: false,
   });
 

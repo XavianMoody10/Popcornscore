@@ -28,9 +28,9 @@ export async function getMoviesByList(req, res) {
 }
 
 export async function getMovieDetails(req, res) {
-  const { movie_id } = req.query;
+  const { mediaId } = req.query;
 
-  const url = `https://api.themoviedb.org/3/movie/${movie_id}`;
+  const url = `https://api.themoviedb.org/3/movie/${mediaId}`;
 
   const options = {
     headers: {

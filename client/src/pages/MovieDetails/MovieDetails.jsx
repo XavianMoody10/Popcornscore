@@ -13,14 +13,16 @@ import { FormTextArea } from "../../components/FormTextArea/FormTextArea";
 import { useGetMediaReviews } from "../../hooks/useGetMediaReviews";
 import { useGetMediaDetails } from "../../hooks/useGetMediaDetails";
 import { usePostMediaReview } from "../../hooks/usePostMediaReview";
+import { PageLoadingOverlay } from "../../components/PageLoadingOverlay/PageLoadingOverlay";
 
 export const MovieDetails = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const { mediaId } = useParams();
-  const reviews = useGetMediaReviews(mediaId);
-  const details = useGetMediaDetails(mediaId);
+  const reviews = useGetMediaReviews("movie", mediaId);
+  const details = useGetMediaDetails("movie", mediaId);
   const postReview = usePostMediaReview(
+    "movie",
     mediaId,
     onReviewPostSuccessEvent,
     onReviewPostErrorEvent
@@ -43,6 +45,8 @@ export const MovieDetails = () => {
 
   return (
     <main className=" min-h-screen pb-3">
+      <PageLoadingOverlay isLoading={details.isLoading} />
+
       <div className=" w-[95%] max-w-[1400px] mx-auto space-y-12">
         <MediaDetails data={details.data} />
 

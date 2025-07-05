@@ -3,7 +3,12 @@ import { postReviewRequest } from "../services/review.services";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-export const usePostMediaReview = (mediaId, onSuccessEvent, onErrorEvent) => {
+export const usePostMediaReview = (
+  mediaType,
+  mediaId,
+  onSuccessEvent,
+  onErrorEvent
+) => {
   const { _id } = useSelector((state) => state.user.value);
   const [review, setReview] = useState("");
   const [title, setTitle] = useState("");
@@ -17,7 +22,7 @@ export const usePostMediaReview = (mediaId, onSuccessEvent, onErrorEvent) => {
 
   function onSubmitHandler(e) {
     e.preventDefault();
-    mutation.mutate({ userId: _id, mediaId, title, review, rating });
+    mutation.mutate({ userId: _id, mediaId, mediaType, title, review, rating });
   }
 
   return {

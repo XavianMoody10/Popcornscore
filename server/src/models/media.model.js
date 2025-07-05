@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 
 const mediaSchema = new Schema({
   mediaId: String,
+  mediaType: String,
   reviews: [reviewSchema],
 });
 

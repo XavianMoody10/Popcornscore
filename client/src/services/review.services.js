@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function postReviewRequest(data) {
-  const { userId, mediaId, title, review, rating } = data;
+  const { userId, mediaId, mediaType, title, review, rating } = data;
 
   const url = `http://localhost:3001/review`;
 
@@ -12,6 +12,10 @@ export async function postReviewRequest(data) {
 
     if (!mediaId) {
       throw Error("mediaId is required");
+    }
+
+    if (!mediaType) {
+      throw Error("mediaType is required");
     }
 
     if (!title) {
@@ -37,16 +41,21 @@ export async function postReviewRequest(data) {
   }
 }
 
-export async function getMediaReviewsRequest(mediaId) {
+export async function getMediaReviewsRequest(mediaType, mediaId) {
   const url = `http://localhost:3001/review`;
 
   try {
+    if (!mediaType) {
+      throw Error("mediaType is required");
+    }
+
     if (!mediaId) {
       throw Error("mediaId is required");
     }
 
     const response = await axios.get(url, {
       params: {
+        mediaType,
         mediaId,
       },
     });
