@@ -28,9 +28,9 @@ export async function getTVShowsByList(req, res) {
 }
 
 export async function getTVShowDetails(req, res) {
-  const { series_id } = req.query;
+  const { mediaId } = req.query;
 
-  const url = `https://api.themoviedb.org/3/tv/${series_id}`;
+  const url = `https://api.themoviedb.org/3/tv/${mediaId}`;
 
   const options = {
     headers: {

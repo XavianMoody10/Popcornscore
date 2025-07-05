@@ -34,7 +34,7 @@ export const MovieDetails = () => {
     postReview.setReview("");
     postReview.setRating(null);
     postReview.setTitle("");
-    queryClient.setQueryData(["reviews", mediaId], data);
+    queryClient.setQueryData(["reviews", "movie", mediaId], data);
     setSuccessMessage("Review has been posted");
   }
 

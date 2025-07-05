@@ -1,32 +1,98 @@
-import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getTVShowDetails } from "../../services/tvShows.services";
+import { FormButton } from "../../components/FormButton/FormButton";
+import Rating from "@mui/material/Rating";
+import { FormTextInput } from "../../components/FormTextInput/FormTextInput";
+import { FormErrorMessage } from "../../components/FormErrorMessage/FormErrorMessage";
+import { queryClient } from "../../App";
+import { ReviewsSlider } from "../../components/ReviewsSlider/ReviewsSlider";
+import { MediaDetails } from "../../components/MediaDetails/MediaDetails";
+import { FormSuccessMessage } from "../../components/FormSuccessMessage/FormSuccessMessage";
+import { FormWrapper } from "../../components/FormWrapper/FormWrapper";
+import { FormTextArea } from "../../components/FormTextArea/FormTextArea";
+import { useGetMediaReviews } from "../../hooks/useGetMediaReviews";
+import { useGetMediaDetails } from "../../hooks/useGetMediaDetails";
+import { usePostMediaReview } from "../../hooks/usePostMediaReview";
+import { PageLoadingOverlay } from "../../components/PageLoadingOverlay/PageLoadingOverlay";
 
 export const TVShowDetails = () => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const { mediaId } = useParams();
+  const reviews = useGetMediaReviews("tv", mediaId);
+  const details = useGetMediaDetails("tv", mediaId);
+  const postReview = usePostMediaReview(
+    "tv",
+    mediaId,
+    onReviewPostSuccessEvent,
+    onReviewPostErrorEvent
+  );
 
-  const query = useQuery({
-    queryKey: ["tv", mediaId],
-    queryFn: () => getTVShowDetails(mediaId),
-    retry: false,
-  });
+  // Executes when review is successfully posted
+  function onReviewPostSuccessEvent(data) {
+    setErrorMessage("");
+    postReview.setReview("");
+    postReview.setRating(null);
+    postReview.setTitle("");
+    queryClient.setQueryData(["reviews", "tv", mediaId], data);
+    setSuccessMessage("Review has been posted");
+  }
 
-  const posterUrl = `https://image.tmdb.org/t/p/original/${query.data?.poster_path}`;
-  const title =
-    query.data?.title || query.data?.name || query.data?.original_title;
-  const overview = query.data?.overview;
+  // Executes when review fails to post
+  function onReviewPostErrorEvent(error) {
+    setErrorMessage(error.message);
+  }
 
   return (
-    <main className=" min-h-screen">
-      <div className=" w-[95%] max-w-[1400px] mx-auto space-y-12">
-        <div className=" flex flex-col items-center gap-3 max-w-[400px] mx-auto min-[800px]:max-w-none min-[800px]:flex-row min-[800px]:justify-between min-[800px]:items-start min-[800px]:gap-16">
-          <div className=" w-full max-w-[400px]">
-            <img src={posterUrl} alt="" className=" w-full" />
-          </div>
+    <main className=" min-h-screen pb-3">
+      <PageLoadingOverlay isLoading={details.isLoading} />
 
-          <div className=" text-center space-y-3 min-[800px]:text-start">
-            <h2 className=" text-xl font-bold lg:text-2xl">{title}</h2>
-            <p className=" lg:text-lg">{overview}</p>
+      <div className=" w-[95%] max-w-[1400px] mx-auto space-y-12">
+        <MediaDetails data={details.data} />
+
+        <div className=" space-y-5">
+          <h2 className=" text-2xl text-[#947EE6] font-bold border-b border-gray-300 pb-4">
+            Reviews
+          </h2>
+
+          <ReviewsSlider reviews={reviews.data?.reviews} />
+        </div>
+
+        <div className=" space-y-5">
+          <h2 className=" text-2xl text-[#947EE6] font-bold border-b border-gray-300 pb-4">
+            Leave a review
+          </h2>
+
+          <div className=" max-w-[500px] space-y-4">
+            <FormErrorMessage errorMessage={errorMessage} />
+            <FormSuccessMessage successMessage={successMessage} />
+
+            <FormWrapper onSubmit={postReview.onSubmitHandler}>
+              <FormTextInput
+                placeholder={"Overall Point"}
+                value={postReview.title}
+                onChange={(e) => postReview.setTitle(e.target.value)}
+              />
+
+              <FormTextArea
+                name={"review"}
+                id={"review"}
+                placeholder={"Add your review"}
+                value={postReview.review}
+                onChange={(e) => postReview.setReview(e.target.value)}
+              />
+
+              <Rating
+                name="half-rating"
+                size="large"
+                defaultValue={0}
+                value={postReview.rating}
+                precision={0.5}
+                onChange={(e, v) => postReview.setRating(v)}
+              />
+
+              <FormButton>Submit Review</FormButton>
+            </FormWrapper>
           </div>
         </div>
       </div>
