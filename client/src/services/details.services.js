@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getMediaDetails(mediaType, mediaId) {
-  const url = `http://localhost:3001/${mediaType}/details`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/${mediaType}/details`;
   try {
     const response = await axios.get(url, {
       params: {

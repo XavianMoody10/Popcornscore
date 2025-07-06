@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getTrendingMedia(mediaType) {
-  const url = `http://localhost:3001/trending/${mediaType}`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/trending/${mediaType}`;
 
   try {
     const response = await axios.get(url);

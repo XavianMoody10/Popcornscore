@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getTVShowsByList(list, page) {
-  const url = `http://localhost:3001/tv/list/${list}`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/tv/list/${list}`;
 
   try {
     const response = await axios.get(url, {
@@ -20,7 +20,7 @@ export async function getTVShowsByList(list, page) {
 }
 
 export async function getTVShowDetails(series_id) {
-  const url = "http://localhost:3001/tv/details";
+  const url = `${import.meta.env.VITE_BACKEND_URL}/tv/details`;
   try {
     const response = await axios.get(url, {
       params: {

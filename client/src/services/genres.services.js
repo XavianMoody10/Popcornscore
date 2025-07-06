@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getGenreList(mediaType) {
-  const url = `http://localhost:3001/${mediaType}/genres`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/${mediaType}/genres`;
   try {
     const response = await axios.get(url);
     return response.data;

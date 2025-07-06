@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getMoviesByList(list, page) {
-  const url = `http://localhost:3001/movie/list/${list}`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/movie/list/${list}`;
 
   try {
     const response = await axios.get(url, {

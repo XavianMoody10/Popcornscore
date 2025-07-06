@@ -2,7 +2,7 @@ import axios from "axios";
 
 async function registerUserRequest(formData) {
   const { username, email, password } = formData;
-  const url = `http://localhost:3001/authentication/register`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/authentication/register`;
 
   try {
     if (!username) {
@@ -27,7 +27,7 @@ async function registerUserRequest(formData) {
 
 async function loginUserRequest(formData) {
   const { email, password } = formData;
-  const url = `http://localhost:3001/authentication/login`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/authentication/login`;
 
   try {
     if (!email) {
@@ -48,7 +48,7 @@ async function loginUserRequest(formData) {
 }
 
 async function checkUserStatusRequest() {
-  const url = `http://localhost:3001/authentication/status`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/authentication/status`;
 
   try {
     const response = await axios.get(url, { withCredentials: true });
@@ -61,7 +61,7 @@ async function checkUserStatusRequest() {
 }
 
 async function logoutUserRequest() {
-  const url = `http://localhost:3001/authentication/logout`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/authentication/logout`;
 
   try {
     const response = await axios.get(url, { withCredentials: true });
