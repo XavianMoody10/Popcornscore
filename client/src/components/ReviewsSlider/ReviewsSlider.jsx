@@ -2,25 +2,44 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { ReviewCard } from "../ReviewCard/ReviewCard";
 
-export const ReviewsSlider = ({ reviews }) => {
-  const reviewCards = reviews
-    ?.map((data) => {
-      return (
-        <SwiperSlide key={data._id}>
-          <ReviewCard
-            title={data.title}
-            review={data.review}
-            username={data.user.username}
-            id={data.user._id}
-          />
-        </SwiperSlide>
-      );
-    })
-    .reverse();
+export const ReviewsSlider = ({ reviews, filteredRating }) => {
+  const reviewCards =
+    filteredRating != "All"
+      ? reviews
+          ?.filter((data) => data.rating == filteredRating)
+          .map((data) => {
+            return (
+              <SwiperSlide key={data._id}>
+                <ReviewCard
+                  title={data.title}
+                  review={data.review}
+                  username={data.user.username}
+                  id={data.user._id}
+                  rating={data.rating}
+                />
+              </SwiperSlide>
+            );
+          })
+          .reverse()
+      : reviews
+          ?.map((data) => {
+            return (
+              <SwiperSlide key={data._id}>
+                <ReviewCard
+                  title={data.title}
+                  review={data.review}
+                  username={data.user.username}
+                  id={data.user._id}
+                  rating={data.rating}
+                />
+              </SwiperSlide>
+            );
+          })
+          .reverse();
 
   return (
     <div className=" min-h-[250px]">
-      {reviews?.length === 0 && (
+      {reviewCards?.length === 0 && (
         <div className=" h-[250px] w-full flex items-center justify-center">
           <p className=" text-2xl font-bold">No reviews</p>
         </div>

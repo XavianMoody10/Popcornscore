@@ -18,6 +18,7 @@ import { PageLoadingOverlay } from "../../components/PageLoadingOverlay/PageLoad
 export const TVShowDetails = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [filteredRating, setFilteredRating] = useState("All");
   const { mediaId } = useParams();
   const reviews = useGetMediaReviews("tv", mediaId);
   const details = useGetMediaDetails("tv", mediaId);
@@ -51,11 +52,28 @@ export const TVShowDetails = () => {
         <MediaDetails data={details.data} />
 
         <div className=" space-y-5">
-          <h2 className=" text-2xl text-[#947EE6] font-bold border-b border-gray-300 pb-4">
-            Reviews
-          </h2>
+          <div className=" border-b border-gray-300 pb-4 flex justify-between">
+            <h2 className=" text-2xl text-[#947EE6] font-bold ">Reviews</h2>
 
-          <ReviewsSlider reviews={reviews.data?.reviews} />
+            <select
+              name="stars"
+              id="stars"
+              className=" w-full max-w-[120px] border p-2 border-gray-300 outline-none"
+              onChange={(e) => setFilteredRating(e.target.value)}
+            >
+              <option value={"All"}>All</option>
+              <option value={1}>1 Star</option>
+              <option value={2}>2 Star</option>
+              <option value={3}>3 Star</option>
+              <option value={4}>4 Star</option>
+              <option value={5}>5 Star</option>
+            </select>
+          </div>
+
+          <ReviewsSlider
+            reviews={reviews.data?.reviews}
+            filteredRating={filteredRating}
+          />
         </div>
 
         <div className=" space-y-5">
