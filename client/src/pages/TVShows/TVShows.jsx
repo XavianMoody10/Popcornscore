@@ -4,6 +4,10 @@ import { MediaPosterSlider } from "../../components/MediaPosterSlider/MediaPoste
 import { useTrendingData } from "../../hooks/useTrendingData";
 import { getTVShowsByList } from "../../services/tvShows.services";
 import { PageLoadingOverlay } from "../../components/PageLoadingOverlay/PageLoadingOverlay";
+import { getGenreList } from "../../services/genres.services";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { GenresSlider } from "../../components/GenresSlider/GenresSlider";
 
 export const TVShows = () => {
   const trending = useTrendingData("tv");
@@ -37,8 +41,15 @@ export const TVShows = () => {
     staleTime: 600000,
   });
 
+  const genres = useQuery({
+    queryKey: ["genres", "tv"],
+    queryFn: () => getGenreList("tv"),
+    retry: false,
+    staleTime: 600000,
+  });
+
   return (
-    <main className=" min-h-screen">
+    <main className=" min-h-screen pb-4">
       <PageLoadingOverlay isLoading={trending.query.isLoading} />
 
       <div className=" w-[95%] max-w-[1400px] mx-auto space-y-12">
@@ -95,6 +106,11 @@ export const TVShows = () => {
             error={topRated.error}
             media_type={"tv"}
           />
+        </section>
+
+        <section className=" space-y-5">
+          <h2 className=" text-2xl font-bold">Genres</h2>
+          <GenresSlider data={genres.data} mediaType={"tv"} />
         </section>
       </div>
     </main>

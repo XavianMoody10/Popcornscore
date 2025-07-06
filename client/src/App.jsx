@@ -17,6 +17,7 @@ import { Movies } from "./pages/Movies/Movies";
 import { TVShows } from "./pages/TVShows/TVShows";
 import { TVShowDetails } from "./pages/TVShowDetails/TVShowDetails";
 import { MovieDetails } from "./pages/MovieDetails/MovieDetails";
+import { Genres } from "./pages/Genres/Genres";
 
 export const queryClient = new QueryClient();
 
@@ -39,6 +40,10 @@ const App = () => {
           <Route path="/tv" element={<TVShows />} />
           <Route path="/tv/details/:mediaId" element={<TVShowDetails />} />
           <Route path="/movie/details/:mediaId" element={<MovieDetails />} />
+          <Route
+            path="/collection/genres/:mediaType/:genreId"
+            element={<Genres />}
+          />
           <Route index element={<Home />} />
         </Route>
       </Route>

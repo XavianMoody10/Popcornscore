@@ -1,11 +1,11 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import { useQuery } from "@tanstack/react-query";
 import { MediaBackdropSlider } from "../../components/MediaBackdropSlider/MediaBackdropSlider";
 import { useTrendingData } from "../../hooks/useTrendingData";
 import { getMoviesByList } from "../../services/movies.services";
 import { MediaPosterSlider } from "../../components/MediaPosterSlider/MediaPosterSlider";
 import { PageLoadingOverlay } from "../../components/PageLoadingOverlay/PageLoadingOverlay";
+import { getGenreList } from "../../services/genres.services";
+import { GenresSlider } from "../../components/GenresSlider/GenresSlider";
 
 export const Movies = () => {
   const trending = useTrendingData("movie");
@@ -39,8 +39,15 @@ export const Movies = () => {
     staleTime: 600000,
   });
 
+  const genres = useQuery({
+    queryKey: ["genres", "movie"],
+    queryFn: () => getGenreList("movie"),
+    retry: false,
+    staleTime: 600000,
+  });
+
   return (
-    <main className=" min-h-screen">
+    <main className=" min-h-screen pb-4">
       <PageLoadingOverlay isLoading={trending.query.isLoading} />
 
       <div className=" w-[95%] max-w-[1400px] mx-auto space-y-12">
@@ -96,6 +103,11 @@ export const Movies = () => {
             error={upcoming.error}
             media_type={"movie"}
           />
+        </section>
+
+        <section className=" space-y-5">
+          <h2 className=" text-2xl font-bold">Genres</h2>
+          <GenresSlider data={genres.data} mediaType={"movie"} />
         </section>
       </div>
     </main>
