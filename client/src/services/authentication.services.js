@@ -64,7 +64,7 @@ async function logoutUserRequest() {
   const url = `${import.meta.env.VITE_BACKEND_URL}/authentication/logout`;
 
   try {
-    const response = await axios.get(url, { withCredentials: true });
+    const response = await axios.post(url, null, { withCredentials: true });
     return response.data;
   } catch (error) {
     if (error?.response?.data) {

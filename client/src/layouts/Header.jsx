@@ -47,7 +47,10 @@ export const Header = () => {
               {settingsIsOpen && (
                 <div className=" absolute bottom-[-50px] w-full">
                   <button
-                    onClick={() => logout.query.refetch()}
+                    onClick={() => {
+                      logout.mutate();
+                      setSettingsIsOpen(false);
+                    }}
                     className=" py-2 w-full font-semibold bg-[#a695ff] text-white rounded-sm hover:bg-[#947EE6]"
                   >
                     Logout

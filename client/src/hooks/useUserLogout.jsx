@@ -1,23 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { logoutUserRequest } from "../services/authentication.services";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { resetUser } from "../app/features/user/userSlice";
 
 export const useUserLogout = () => {
   const dispatch = useDispatch();
 
-  const query = useQuery({
-    queryKey: ["logout"],
-    queryFn: logoutUserRequest,
-    retry: false,
-    staleTime: 0,
-    enabled: false,
+  const mutation = useMutation({
+    mutationFn: () => logoutUserRequest(),
+    onSuccess: () => {
+      dispatch(resetUser());
+    },
+    onError: (error) => {
+      console.log(error.message);
+    },
   });
 
-  useEffect(() => {
-    dispatch(resetUser());
-  }, [query.isSuccess]);
-
-  return { query };
+  return mutation;
 };
