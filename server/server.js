@@ -16,6 +16,9 @@ const ORIGIN = process.env.ORIGIN;
 const PORT = process.env.PORT;
 const secret = process.env.SECRET;
 
+// Enable trust proxy
+app.set("trust proxy", true);
+
 // Middleware
 app.use(cors({ origin: ORIGIN, credentials: true }));
 app.use(express.json());
