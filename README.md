@@ -6,8 +6,6 @@
 
 A full-stack MERN application that allows users to rate and leave reviews for movies and TV shows.
 
-<!-- > ⚠️ **Note:** This project is still in active development. More features and improvements will be added in the future. -->
-
 ## 📦 Libraries Used & Their Purpose
 
 ### 🧩 Frontend Libraries
@@ -38,3 +36,5 @@ A full-stack MERN application that allows users to rate and leave reviews for mo
 ## Deployed Project
 
 [Link to deployed project](https://popcornscore.onrender.com)
+
+> ⚠️ **Note:** Render.com free tier has a 15 second cold start, so the application may take a while to load.
