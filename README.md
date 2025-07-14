@@ -6,7 +6,7 @@
 
 A full-stack MERN application that allows users to rate and leave reviews for movies and TV shows.
 
-> ⚠️ **Note:** This project is still in active development. More features and improvements will be added in the future.
+<!-- > ⚠️ **Note:** This project is still in active development. More features and improvements will be added in the future. -->
 
 ## 📦 Libraries Used & Their Purpose
 
@@ -34,3 +34,7 @@ A full-stack MERN application that allows users to rate and leave reviews for mo
 | **Cors**        | Enables cross-origin requests between frontend and backend |
 | **Axios**       | Makes HTTP requests to backend APIs                        |
 | **Passport.JS** | Authentication middleware for Node.js                      |
+
+## Deployed Project
+
+[Link to deployed project](https://popcornscore.onrender.com)
