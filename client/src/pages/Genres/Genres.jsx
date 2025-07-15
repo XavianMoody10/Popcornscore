@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { PageLoadingOverlay } from "../../components/PageLoadingOverlay/PageLoadingOverlay";
 
 export const Genres = () => {
-  const { ref, inView } = useInView({ threshold: 1 });
+  const { ref, inView } = useInView({ threshold: 0.3 });
   const { mediaType, genreId } = useParams();
 
   const query = useInfiniteQuery({
