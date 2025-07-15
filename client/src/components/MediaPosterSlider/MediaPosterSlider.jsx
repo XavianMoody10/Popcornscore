@@ -5,6 +5,10 @@ import { MdErrorOutline as ErrorIcon } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { MediaPoster } from "../MediaPoster/MediaPoster";
+import { FaChevronCircleLeft as LeftArrow } from "react-icons/fa";
+import { FaChevronCircleRight as RightArrow } from "react-icons/fa";
+import { Swiper as SwiperInterface } from "swiper";
+import { useState } from "react";
 
 export const MediaPosterSlider = ({
   results,
@@ -13,6 +17,20 @@ export const MediaPosterSlider = ({
   error,
   media_type,
 }) => {
+  const [swiperInstance, setSwiperInstance] = useState(null);
+
+  const goToNextSlide = () => {
+    if (swiperInstance) {
+      swiperInstance.slideNext();
+    }
+  };
+
+  const goToPrevSlide = () => {
+    if (swiperInstance) {
+      swiperInstance.slidePrev();
+    }
+  };
+
   const slides = results?.map((data) => {
     return (
       <SwiperSlide key={data.id}>
@@ -22,9 +40,27 @@ export const MediaPosterSlider = ({
   });
 
   return (
-    <div className=" min-h-[250px] relative">
+    <div className=" min-h-[250px] relative select-none">
+      {isSuccess && (
+        <div className=" hidden lg:block">
+          <div
+            onClick={goToPrevSlide}
+            className=" absolute top-0 bottom-0 left-0 bg-[#947EE6]/45 hover:bg-[#947EE6]/80 z-10 px-1 flex items-center justify-center"
+          >
+            <LeftArrow color="white" size={30} />
+          </div>
+          <div
+            onClick={goToNextSlide}
+            className=" absolute top-0 bottom-0 right-0 bg-[#947EE6]/45 hover:bg-[#947EE6]/80 z-10 px-1 flex items-center justify-center"
+          >
+            <RightArrow color="white" size={30} />
+          </div>
+        </div>
+      )}
+
       {isSuccess && (
         <Swiper
+          onSwiper={(swiper) => setSwiperInstance(swiper)}
           slidesPerView={1.1}
           spaceBetween={8}
           breakpoints={{

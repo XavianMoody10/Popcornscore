@@ -13,7 +13,7 @@ export const Header = () => {
   const location = useLocation();
 
   return (
-    <header className=" sticky top-0 w-full py-6 bg-white z-10 space-y-4">
+    <header className=" sticky top-0 w-full py-6 bg-white z-20 space-y-4">
       <div className=" flex items-center justify-between w-[95%] max-w-[1400px] mx-auto">
         <Link to={"/"}>
           <img

@@ -52,7 +52,7 @@ export const TVShows = () => {
     <main className=" min-h-screen pb-4">
       <PageLoadingOverlay isLoading={trending.query.isLoading} />
 
-      <div className=" w-[95%] max-w-[1400px] mx-auto space-y-12">
+      <div className=" w-[95%] max-w-[1400px] mx-auto space-y-20">
         <MediaBackdropSlider
           results={trending.query.data?.results}
           isSuccess={trending.query.isSuccess}
