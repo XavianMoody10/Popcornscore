@@ -16,7 +16,12 @@ export const Genres = () => {
     queryFn: ({ pageParam = 1 }) =>
       getGenreCollection(mediaType, genreId, pageParam),
     getNextPageParam: (lastPage, pages) => {
-      if (pages[pages.length - 1].page !== 2) {
+      const totalPages =
+        import.meta.env.VITE_NODE_ENV === "development"
+          ? 2
+          : lastPage.total_pages;
+
+      if (pages[pages.length - 1].page !== totalPages) {
         return lastPage.page + 1;
       } else {
         return undefined;
