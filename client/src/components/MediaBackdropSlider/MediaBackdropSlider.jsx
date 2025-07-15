@@ -29,7 +29,9 @@ export const MediaBackdropSlider = ({
     }
   };
 
-  const slides = results?.map((data) => {
+  const data = results?.filter((data) => data.id);
+
+  const slides = data?.map((data) => {
     return (
       <SwiperSlide key={data.id}>
         <MediaBackdrop mediaData={data} />
@@ -37,13 +39,21 @@ export const MediaBackdropSlider = ({
     );
   });
 
-  const bullets = results?.map((data, index) => {
+  const bullets = data?.map((data, index) => {
     if (currentSlide === index) {
       return (
-        <div className=" h-[13px] w-[13px] bg-purple-500 rounded-full"></div>
+        <div
+          key={data.id}
+          className=" h-[13px] w-[13px] bg-purple-500 rounded-full"
+        ></div>
       );
     } else {
-      return <div className=" h-[13px] w-[13px] bg-black rounded-full"></div>;
+      return (
+        <div
+          key={data.id}
+          className=" h-[13px] w-[13px] bg-black rounded-full"
+        ></div>
+      );
     }
   });
 

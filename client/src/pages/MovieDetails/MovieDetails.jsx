@@ -73,6 +73,8 @@ export const MovieDetails = () => {
           <ReviewsSlider
             reviews={reviews.data?.reviews}
             filteredRating={filteredRating}
+            mediaId={mediaId}
+            mediaType={"movie"}
           />
         </div>
 

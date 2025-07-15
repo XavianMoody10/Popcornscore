@@ -1,13 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { IoIosInformationCircleOutline as InfoIcon } from "react-icons/io";
 import { MdErrorOutline as ErrorIcon } from "react-icons/md";
-import { Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { MediaPoster } from "../MediaPoster/MediaPoster";
 import { FaChevronCircleLeft as LeftArrow } from "react-icons/fa";
 import { FaChevronCircleRight as RightArrow } from "react-icons/fa";
-import { Swiper as SwiperInterface } from "swiper";
 import { useState } from "react";
 
 export const MediaPosterSlider = ({

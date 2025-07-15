@@ -2,7 +2,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { ReviewCard } from "../ReviewCard/ReviewCard";
 
-export const ReviewsSlider = ({ reviews, filteredRating }) => {
+export const ReviewsSlider = ({
+  reviews,
+  filteredRating,
+  mediaId,
+  mediaType,
+}) => {
   const reviewCards =
     filteredRating != "All"
       ? reviews
@@ -14,8 +19,11 @@ export const ReviewsSlider = ({ reviews, filteredRating }) => {
                   title={data.title}
                   review={data.review}
                   username={data.user.username}
-                  id={data.user._id}
+                  userId={data.user._id}
+                  reviewId={data._id}
                   rating={data.rating}
+                  mediaId={mediaId}
+                  mediaType={mediaType}
                 />
               </SwiperSlide>
             );
@@ -29,8 +37,11 @@ export const ReviewsSlider = ({ reviews, filteredRating }) => {
                   title={data.title}
                   review={data.review}
                   username={data.user.username}
-                  id={data.user._id}
+                  userId={data.user._id}
+                  reviewId={data._id}
                   rating={data.rating}
+                  mediaId={mediaId}
+                  mediaType={mediaType}
                 />
               </SwiperSlide>
             );

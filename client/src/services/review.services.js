@@ -69,3 +69,18 @@ export async function getMediaReviewsRequest(mediaType, mediaId) {
     throw Error(error.message);
   }
 }
+
+export async function deleteReview(data) {
+  const url = `${import.meta.env.VITE_BACKEND_URL}/review`;
+
+  try {
+    const response = await axios.delete(url, { data });
+    return response;
+  } catch (error) {
+    if (error?.response?.data) {
+      throw Error(error.response.data);
+    }
+
+    throw Error(error.message);
+  }
+}
